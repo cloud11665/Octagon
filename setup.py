@@ -9,7 +9,7 @@ def readfile(filename):
 
 setuptools.setup(
     name='Octagon',
-    version='1.0.0',
+    version='1.0.5',
     description='How can I find an octagon? How, Elmo? How?',
     long_description=readfile('README.md'),
     long_description_content_type="text/markdown",
