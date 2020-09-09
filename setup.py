@@ -9,7 +9,7 @@ def readfile(filename):
 
 setuptools.setup(
     name='Octagon',
-    version='0.2',
+    version='0.3.2',
     description='How can I find an octagon? How, Elmo? How?',
     long_description=readfile('README.md'),
     long_description_content_type="text/markdown",
@@ -17,9 +17,9 @@ setuptools.setup(
     author_email='Cloud11665@gmail.com',
     url='https://github.com/Cloud11665/octagon',
     packages=setuptools.find_packages(),
-    license=readfile('LICENSE'),
+    license='gpl-3.0',
     entry_points={
-        'console_scripts': ['octagon = code.__init__']
+        'console_scripts': ['octagon = Octagon.__init__:main']
     },
     classifiers=[
         "Programming Language :: Python :: 3",
