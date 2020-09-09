@@ -51,11 +51,12 @@ def compute(img: Union[Tuple, List], scale: float = 0.75, debug: bool = False):
 @click.option('--wres', nargs=2, type=int, default=(640, 480))
 @click.option('--wid', nargs=1,type=int, default=0)
 @click.option('--fps', nargs=1,type=int, default=10)
-@click.option('-i', '--image', '--img', nargs=1, type=str, is_flag=True, default='^')
+@click.option('-i', '--image', '--img', nargs=1, type=str, default='^')
 @click.option('-v', '--video', nargs=1, default='^', type=str)
 @click.option('-d', '--debug', is_flag=True)
 @click.option('-o', '--output', '--out', nargs=1, default='^', type=str)
-def main(webcam, wres, wid, fps, image, video, debug, output):
+@click.option('-s', '--scale', nargs=1, default=0.75, type=float)
+def main(webcam, wres, wid, fps, image, video, debug, output, scale):
 	if webcam:
 		cam = cv2.VideoCapture(wid)
 		cam.set(3, wres[0])
@@ -64,13 +65,16 @@ def main(webcam, wres, wid, fps, image, video, debug, output):
 		while True:
 			time.sleep(1/fps)
 			_, img = cam.read()
-			cv2.imshow('Octagon', compute(img, debug=debug))
+			cv2.imshow('Octagon', compute(img, scale, debug))
 
 			if cv2.waitKey(1) & 0xFF == ord('q'):
 				sys.exit(2)
 	if image:
 		img = cv2.imread(image)
-		cv2.imshow('Octagon', compute(img, debug=debug))
+		if output:
+			cv2.imwrite(output, compute(img, 1.0))
+
+		cv2.imshow('Octagon', compute(img, scale, debug))
 		cv2.waitKey(0)
 
 	if video:
