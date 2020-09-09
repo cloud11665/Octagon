@@ -9,7 +9,6 @@ import numpy as np
 
 CANNY_TH1 = 60
 CANNY_TH2 = 120
-PATH = './../src/img/stop.png'
 
 
 def img_stack(src: Union[Tuple, List], scale: float) -> np.ndarray:
