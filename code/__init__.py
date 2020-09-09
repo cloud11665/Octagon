@@ -35,7 +35,7 @@ def compute(img: Union[Tuple, List], scale: float = 0.75, debug: bool = False):
 	img_bl = np.zeros_like(img)
 	img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 	img_prep = cv2.GaussianBlur(img_gray, (5, 5), 1)
-	img_prep = cv2.bilateralFilter(img_prep, 7, 50, 50)
+	img_prep = cv2.bilateralFilter(img_prep, 7, 40, 35)
 	img_canny = cv2.Canny(img_prep, CANNY_TH1, CANNY_TH2)
 	img_mask = contours(img_canny, img_mask)
 
@@ -49,37 +49,36 @@ def compute(img: Union[Tuple, List], scale: float = 0.75, debug: bool = False):
 @click.command()
 @click.option('-w', '--webcam', is_flag=True)
 @click.option('--wres', nargs=2, type=int, default=(640, 480))
-@click.option('--wid', )
-def main(photo, photo_path, film, film_path, wecam, webcam_id,webcam_fps, webcam_res):
-
-	cam = cv2.VideoCapture(0)
-	cam.set(10, 100)
-	while True:
-		time.sleep(0.1)
-		stat, img = cam.read()
-
-		cv2.imshow('Octagon', compute(img))
-
-		if cv2.waitKey(1) & 0xFF == ord('q'):
-			break
-
-'''
-@click.command()
-@click.option('--webcam', '-w', default=False)
-def main(webcam, path, debug, framewidth=640, frameheight=480):
+@click.option('--wid', nargs=1,type=int, default=0)
+@click.option('--fps', nargs=1,type=int, default=10)
+@click.option('-i', '--image', '--img', nargs=1, type=str, is_flag=True, default='^')
+@click.option('-v', '--video', nargs=1, default='^', type=str)
+@click.option('-d', '--debug', is_flag=True)
+@click.option('-o', '--output', '--out', nargs=1, default='^', type=str)
+def main(webcam, wres, wid, fps, image, video, debug, output):
 	if webcam:
-		cam = cv2.VideoCapture(0)
+		cam = cv2.VideoCapture(wid)
+		cam.set(3, wres[0])
+		cam.set(4, wres[1])
 		cam.set(10, 100)
-		cam.set(3, framewidth)
-		cam.set(4, frameheight)
 		while True:
-			time.sleep(0.1)
-			stat, img = cam.read()
-
-			cv2.imshow('Octagon', compute(img))
+			time.sleep(1/fps)
+			_, img = cam.read()
+			cv2.imshow('Octagon', compute(img, debug=debug))
 
 			if cv2.waitKey(1) & 0xFF == ord('q'):
-				break
-	elif path:
-		img = cv2.imread(path)
-		cv2.imshow('Octagon', compute(img))'''
+				sys.exit(2)
+	if image:
+		img = cv2.imread(image)
+		cv2.imshow('Octagon', compute(img, debug=debug))
+		cv2.waitKey(0)
+
+	if video:
+		print('Not implemented yet')
+		sys.exit(2)
+
+	else:
+		print('Invalid arguments.')
+		sys.exit(2)
+
+main()
