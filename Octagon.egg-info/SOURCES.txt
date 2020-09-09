@@ -1,7 +1,6 @@
 README.md
 setup.py
 Octagon/__init__.py
-Octagon/stack.py
 Octagon.egg-info/PKG-INFO
 Octagon.egg-info/SOURCES.txt
 Octagon.egg-info/dependency_links.txt
