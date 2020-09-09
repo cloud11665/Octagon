@@ -1,3 +1,0 @@
-[console_scripts]
-octagon = Octagon.__init__:main
-
