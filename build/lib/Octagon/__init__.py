@@ -9,7 +9,6 @@ import numpy as np
 
 CANNY_TH1 = 60
 CANNY_TH2 = 120
-PATH = './../src/img/stop.png'
 
 
 def img_stack(src: Union[Tuple, List], scale: float) -> np.ndarray:
@@ -80,16 +79,17 @@ def compute(img: Union[Tuple, List], scale: float = 0.75, debug: bool = False):
 	
 	
 @click.command()
-@click.option('-w', '--webcam', is_flag=True)
-@click.option('--wres', nargs=2, type=int, default=(640, 480))
-@click.option('--wid', nargs=1,type=int, default=0)
-@click.option('--fps', nargs=1,type=int, default=10)
-@click.option('-i', '--image', '--img', nargs=1, type=str, default='^')
-@click.option('-v', '--video', nargs=1, default='^', type=str)
-@click.option('-d', '--debug', is_flag=True)
-@click.option('-o', '--output', '--out', nargs=1, default='^', type=str)
-@click.option('-s', '--scale', nargs=1, default=0.75, type=float)
-def main(webcam, wres, wid, fps, image, video, debug, output, scale):
+@click.option('-d', '--debug', is_flag=True, help="Debug mode, shows the process of edge detection.")
+@click.option('--nogui', is_flag=True, help="FLAG, doesn't show the default gui.")
+@click.option('-w', '--webcam', is_flag=True, help="FLAG, can only choose one.")
+@click.option('--wres', nargs=2, type=int, default=(640, 480), help="Size of output, <x, y>, defaults to 640x480px")
+@click.option('--wid', nargs=1,type=int, default=0, help="webcam ID, defaults to 0")
+@click.option('--fps', nargs=1,type=int, default=10, help="Webcam FPS, defaults to 10")
+@click.option('-i', '--image', '--img',  nargs=1, default='',  type=str, help="Input image path.")
+@click.option('-v', '--video',           nargs=1, default='',  type=str, help="Input video path.")
+@click.option('-o', '--output', '--out', nargs=1, default='',  type=str, help="Output path.")
+@click.option('-s', '--scale',           nargs=1, default=0.75, type=float, help="Gui scale.")
+def main(webcam, wres, wid, fps, image, video, debug, output, scale, nogui):
 	if webcam:
 		cam = cv2.VideoCapture(wid)
 		cam.set(3, wres[0])
@@ -105,10 +105,11 @@ def main(webcam, wres, wid, fps, image, video, debug, output, scale):
 	if image:
 		img = cv2.imread(image)
 		if output:
-			cv2.imwrite(output, compute(img, 1.0))
-
-		cv2.imshow('Octagon', compute(img, scale, debug))
-		cv2.waitKey(0)
+			cv2.imwrite(output, compute(img, 1.0, debug))
+		if not nogui:
+			cv2.imshow('Octagon', compute(img, scale, debug))
+			cv2.waitKey(0)
+		sys.exit(2)
 
 	if video:
 		print('Not implemented yet')
