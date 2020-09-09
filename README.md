@@ -7,8 +7,6 @@
 [![](https://img.shields.io/pypi/v/Octagon)](https://pypi.org/project/Octagon)
 [![](https://img.shields.io/pypi/pyversions/Octagon)](https://pypi.org/project/Octagon)
 
-# Octagon
-
 <img src="src/img/output.png" width=700px>
 
 ## Installation
