@@ -1,4 +1,6 @@
 /venv
 /.idea
+#Binaries
 /*.egg-info
+/dist
 *.exe
