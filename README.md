@@ -1,5 +1,3 @@
-<img src="src/img/output.png" width=500px>
-
 <div class=root>
   <div class=badges align=left>
       <a href=https://github.com/Cloud11665/Octagon/actions>
