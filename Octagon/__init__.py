@@ -67,13 +67,13 @@ def compute(img: Union[Tuple, List], scale: float = 0.75, debug: bool = False):
 	img_bl = np.zeros_like(img)
 	img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 	img_prep = cv2.GaussianBlur(img_gray, (5, 5), 1)
-	img_prep = cv2.bilateralFilter(img_prep, 7, 40, 35)
-	img_canny = cv2.Canny(img_prep, CANNY_TH1, CANNY_TH2)
+	img_bil = cv2.bilateralFilter(img_prep, 7, 40, 35)
+	img_canny = cv2.Canny(img_bil, CANNY_TH1, CANNY_TH2)
 	img_mask = contours(img_canny, img_mask)
 
 	if debug:
 		return img_stack(([img, img_gray, img_prep],
-						[img_canny, img_mask, img_bl]), scale)
+						[img_bil, img_canny, img_mask,]), scale)
 	else:
 		return img_mask
 	

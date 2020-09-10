@@ -115,9 +115,8 @@ def main(webcam, wres, wid, fps, image, video, debug, output, scale, nogui):
 		print('Not implemented yet')
 		sys.exit(2)
 
-	else:
-		print('Invalid arguments.')
-		sys.exit(2)
+	print('Invalid arguments.')
+	sys.exit(2)
 
 
 main()
