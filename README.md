@@ -35,14 +35,6 @@ pip install octagon
 --help                    #Show this message and exit.
 ```
 
-## Meta
-
-Your Name – [@Cloud11665](https://twitter.com/Cloud11665) – Cloud11665@gmail.com
-
-Distributed under the GPL-3.0 license. See ``LICENSE`` for more information.
-
-[https://github.com/Cloud11665/Octagon](https://github.com/Cloud11665/)
-
 ## Contributing
 
 1. Fork it (<https://github.com/Cloud11665/Octagon/fork>)
@@ -50,4 +42,11 @@ Distributed under the GPL-3.0 license. See ``LICENSE`` for more information.
 3. Commit your changes (`git commit -am 'Add some fooBar'`)
 4. Push to the branch (`git push origin feature/fooBar`)
 5. Create a new Pull Request
-jd
+
+## Meta
+
+Cloud11665 – [@Cloud11665](https://twitter.com/Cloud11665) – Cloud11665@gmail.com
+
+Distributed under the GPL-3.0 license. See ``LICENSE`` for more information.
+
+[https://github.com/Cloud11665/Octagon](https://github.com/Cloud11665/)
