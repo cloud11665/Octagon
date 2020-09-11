@@ -74,10 +74,10 @@ def compute(img: Union[Tuple, List], scale: float = 0.75, debug: bool = False):
 	if debug:
 		return img_stack(([img, img_gray, img_prep],
 						[img_bil, img_canny, img_mask,]), scale)
-	else:
-		return img_mask
-	
-	
+
+	return img_mask
+
+
 @click.command()
 @click.option('-d', '--debug', is_flag=True, help="Debug mode, shows the process of edge detection.")
 @click.option('--nogui', is_flag=True, help="FLAG, doesn't show the default gui.")

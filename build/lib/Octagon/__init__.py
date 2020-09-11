@@ -67,28 +67,28 @@ def compute(img: Union[Tuple, List], scale: float = 0.75, debug: bool = False):
 	img_bl = np.zeros_like(img)
 	img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 	img_prep = cv2.GaussianBlur(img_gray, (5, 5), 1)
-	img_prep = cv2.bilateralFilter(img_prep, 7, 40, 35)
-	img_canny = cv2.Canny(img_prep, CANNY_TH1, CANNY_TH2)
+	img_bil = cv2.bilateralFilter(img_prep, 7, 40, 35)
+	img_canny = cv2.Canny(img_bil, CANNY_TH1, CANNY_TH2)
 	img_mask = contours(img_canny, img_mask)
 
 	if debug:
 		return img_stack(([img, img_gray, img_prep],
-						[img_canny, img_mask, img_bl]), scale)
-	else:
-		return img_mask
-	
-	
+		                  [img_bil, img_canny, img_mask, ]), scale)
+
+	return img_mask
+
+
 @click.command()
 @click.option('-d', '--debug', is_flag=True, help="Debug mode, shows the process of edge detection.")
 @click.option('--nogui', is_flag=True, help="FLAG, doesn't show the default gui.")
 @click.option('-w', '--webcam', is_flag=True, help="FLAG, can only choose one.")
 @click.option('--wres', nargs=2, type=int, default=(640, 480), help="Size of output, <x, y>, defaults to 640x480px")
-@click.option('--wid', nargs=1,type=int, default=0, help="webcam ID, defaults to 0")
-@click.option('--fps', nargs=1,type=int, default=10, help="Webcam FPS, defaults to 10")
-@click.option('-i', '--image', '--img',  nargs=1, default='',  type=str, help="Input image path.")
-@click.option('-v', '--video',           nargs=1, default='',  type=str, help="Input video path.")
-@click.option('-o', '--output', '--out', nargs=1, default='',  type=str, help="Output path.")
-@click.option('-s', '--scale',           nargs=1, default=0.75, type=float, help="Gui scale.")
+@click.option('--wid', nargs=1, type=int, default=0, help="webcam ID, defaults to 0")
+@click.option('--fps', nargs=1, type=int, default=10, help="Webcam FPS, defaults to 10")
+@click.option('-i', '--image', '--img', nargs=1, default='', type=str, help="Input image path.")
+@click.option('-v', '--video', nargs=1, default='', type=str, help="Input video path.")
+@click.option('-o', '--output', '--out', nargs=1, default='', type=str, help="Output path.")
+@click.option('-s', '--scale', nargs=1, default=0.75, type=float, help="Gui scale.")
 def main(webcam, wres, wid, fps, image, video, debug, output, scale, nogui):
 	if webcam:
 		cam = cv2.VideoCapture(wid)
@@ -96,7 +96,7 @@ def main(webcam, wres, wid, fps, image, video, debug, output, scale, nogui):
 		cam.set(4, wres[1])
 		cam.set(10, 100)
 		while True:
-			time.sleep(1/fps)
+			time.sleep(1 / fps)
 			_, img = cam.read()
 			cv2.imshow('Octagon', compute(img, scale, debug))
 

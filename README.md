@@ -35,7 +35,10 @@ pip install octagon
 --help                    #Show this message and exit.
 ```
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 93e5dd76ccfe359dbd23274651032c0b5416d32b
 ## Contributing
 
 1. Fork it (<https://github.com/Cloud11665/Octagon/fork>)
@@ -46,7 +49,11 @@ pip install octagon
 
 ## Meta
 
+<<<<<<< HEAD
 Your Name – [@Cloud11665](https://twitter.com/Cloud11665) – Cloud11665@gmail.com
+=======
+Cloud11665 – [@Cloud11665](https://twitter.com/Cloud11665) – Cloud11665@gmail.com
+>>>>>>> 93e5dd76ccfe359dbd23274651032c0b5416d32b
 
 Distributed under the GPL-3.0 license. See ``LICENSE`` for more information.
 
