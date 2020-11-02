@@ -24,7 +24,8 @@ def img_stack(src: Union[Tuple, List], scale: float) -> np.ndarray:
 					src[x][y] = cv2.resize(src[x][y], (0, 0), fx=scale, fy=scale)
 				else:
 					src[x][y] = cv2.resize(src[x][y], (src[0][0].shape[1], src[0][0].shape[0]), fx=scale, fy=scale)
-				if len(src[x][y].shape) == 2: src[x][y] = cv2.cvtColor(src[x][y], cv2.COLOR_GRAY2BGR)
+				if len(src[x][y].shape) == 2:
+					src[x][y] = cv2.cvtColor(src[x][y], cv2.COLOR_GRAY2BGR)
 
 		img_blank = np.zeros((height, width, 3), np.uint8)
 		hor = [img_blank] * rows
