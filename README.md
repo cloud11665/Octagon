@@ -44,4 +44,4 @@ pip install octagon
 5. Create a new Pull Request
 
 ## License
-Distributed under the GPL-3.0 license. See [``LICENSE``](https://github.com/Cloud11665/Octagon/blob/master/LICENSE) for more information.
+Distributed under the MIT license. See [``LICENSE``](https://github.com/Cloud11665/Octagon/blob/master/LICENSE) for more information.
